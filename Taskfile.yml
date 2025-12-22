@@ -1,0 +1,18 @@
+version: '3'
+
+tasks:
+  setup:
+    desc: Install backend & frontend dependencies and set up pre-commit hooks
+    cmds:
+      - task: precommit:install
+
+
+  precommit:install:
+    desc: Install git pre-commit hook for the backend
+    cmds:
+      - uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
+
+  precommit:run:
+    desc: Run all pre-commit hooks on all files
+    cmds:
+      - uv run pre-commit run --all-files
