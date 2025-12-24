@@ -1,20 +1,17 @@
 from fastapi import APIRouter, Depends, Request
-from backend.core.security import verify_api_key, get_current_user
-from backend.core.rate_limit import limiter
+from core.security import verify_api_key
+from core.rate_limit import limiter
 
-router = APIRouter(
-    prefix="/health",
-    tags=["Health"]
-)
+router = APIRouter(prefix="/health", tags=["Health"])
+
 
 @router.get("")
-@limiter.limit("10/minute")  # limit 10 requests per minute
+@limiter.limit("10/minute")
 def health_check(
     request: Request,
     _: None = Depends(verify_api_key),
-    __: str = Depends(get_current_user)  # optional: enforce OAuth too
+    # __: str = Depends(get_current_user)
 ):
-    return {
-        "status": "ok",
-        "service": "backend-api"
-    }
+    request_id = request.state.request_id
+    print(f"Request ID: {request_id}")
+    return {"status": "ok", "service": "backend-api", "request_id": request_id}

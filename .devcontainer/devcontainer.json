@@ -3,35 +3,25 @@
 {
 	"name": "Training FastAPI",
 	"build": {
-		"context": "..",
-		"dockerfile": "../Dockerfile"
+		"context": "../backend",
+		"dockerfile": "../backend/Dockerfile"
 	},
 	"remoteUser": "root",
-	"forwardPorts": [8000],
-	"features": {
-		"ghcr.io/devcontainers/features/python:1": {
-			"installTools": true,
-			"version": "3.11"
-		}
-	},
-	"postCreateCommand": "uv sync --frozen --no-dev",
+	"forwardPorts": [
+		8000
+	],
+	"postCreateCommand": "task setup",
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
 				"ms-python.vscode-pylance"
 			]
+		},
+		"settings": {
+			"[python]": {
+					"editor.defaultFormatter": "ms-python.black-formatter"
+				}
 		}
 	}
-}
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
-	// Configure tool-specific properties.
-	// "customizations": {},
-	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "devcontainer"
 }

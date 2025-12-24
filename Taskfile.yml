@@ -2,17 +2,24 @@ version: '3'
 
 tasks:
   setup:
-    desc: Install backend & frontend dependencies and set up pre-commit hooks
+    desc: Install backend dependencies and set up pre-commit hooks
     cmds:
+      - task: install:backend
       - task: precommit:install
 
+  install:backend:
+    desc: Install backend dependencies
+    cmds:
+      - cd backend && uv sync --frozen #no use for project toml, use uv.lock instead
 
   precommit:install:
     desc: Install git pre-commit hook for the backend
     cmds:
       - uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
 
+
   precommit:run:
     desc: Run all pre-commit hooks on all files
     cmds:
       - uv run pre-commit run --all-files
+      - cd backend && uv venv

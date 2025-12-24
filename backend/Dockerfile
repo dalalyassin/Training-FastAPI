@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG PYTHON_VERSION=3.11.9
-FROM python:3.11.9 as base
+FROM python:3.11.9 AS base
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -10,10 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /app
-
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Install Task
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 
 # Copy dependency files first
 COPY pyproject.toml uv.lock ./
@@ -21,7 +21,7 @@ COPY pyproject.toml uv.lock ./
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to speed up subsequent builds.
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --no-dev
+    uv sync --frozen
 
 # Copy the source code into the container.
 COPY . .

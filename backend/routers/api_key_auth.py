@@ -1,11 +1,9 @@
 from fastapi import APIRouter, Depends, Request
-from backend.core.rate_limit import limiter
-from backend.core.security import verify_api_key
+from core.rate_limit import limiter
+from core.security import verify_api_key
 
-router = APIRouter(
-    prefix="/api-key",
-    tags=["API Key Auth"]
-)
+router = APIRouter(prefix="/api-key", tags=["API Key Auth"])
+
 
 @router.get("/protected")
 @limiter.limit("5/minute")
