@@ -1,25 +1,20 @@
 from pydantic import BaseModel
-from typing import List
+from typing import Optional, Dict, Any
 
 
-class ChatMessage(BaseModel):
+class ChatRequest(BaseModel):
     text: str
     content: str
 
 
-class ChatRequest(BaseModel):
-    messages: List[ChatMessage]
-
-
-class ChatResponse(BaseModel):
-    reply: str
-
-
-# Add these new schemas
 class Prompt(BaseModel):
     text: str
+    user_id: Optional[int] = None
+    metadata: Optional[Dict[str, Any]] = None
+    talk: int
 
 
 class LLMResponse(BaseModel):
+    prompt: Prompt
     response_text: str
     tokens_used: int

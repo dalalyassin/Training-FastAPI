@@ -1,4 +1,3 @@
-import time
 from typing import Generator
 
 
@@ -14,4 +13,3 @@ def stream_tokens(
         if trace_id:
             print(f"[TRACE {trace_id}] Streaming token: {token}")
         yield f"data: {token}\n\n"
-        time.sleep(0.3)
