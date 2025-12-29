@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Request
-from core.security import verify_api_key
+
 from core.rate_limit import limiter
+from core.security import verify_api_key
 
 router = APIRouter(prefix="/health", tags=["Health"])
 

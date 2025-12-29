@@ -1,13 +1,13 @@
 import pytest
-from jose import jwt
-from fastapi import HTTPException, status
 from backend.core.security import (
-    verify_api_key,
-    create_access_token,
-    get_current_user,
     API_KEY,
     SECRET_KEY,
+    create_access_token,
+    get_current_user,
+    verify_api_key,
 )
+from fastapi import HTTPException, status
+from jose import jwt
 
 
 class TestVerifyAPIKey:
@@ -88,6 +88,7 @@ class TestGetCurrentUser:
     def test_expired_token(self):
         """Test with expired token."""
         from datetime import datetime, timedelta
+
         from backend.core.security import ALGORITHM
 
         # Create expired token

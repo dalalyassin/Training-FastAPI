@@ -1,9 +1,10 @@
 # tests/test_streaming.py
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
 from backend.core.streaming import stream_tokens
-from backend.services.llm import generate_stream_response
 from backend.schemas.chat import Prompt
+from backend.services.llm import generate_stream_response
 
 
 class TestStreamTokens:

@@ -1,9 +1,10 @@
 import sys
 from pathlib import Path
-import pytest
-from fastapi.testclient import TestClient
 from unittest.mock import MagicMock
+
+import pytest
 from backend.main import app
+from fastapi.testclient import TestClient
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))

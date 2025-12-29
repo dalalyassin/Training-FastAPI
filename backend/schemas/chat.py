@@ -1,5 +1,6 @@
+from typing import Any
+
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
 
 
 class ChatRequest(BaseModel):
@@ -9,8 +10,8 @@ class ChatRequest(BaseModel):
 
 class Prompt(BaseModel):
     text: str
-    user_id: Optional[int] = None
-    metadata: Optional[Dict[str, Any]] = None
+    user_id: int | None = None
+    metadata: dict[str, Any] | None = None
     talk: int
 
 

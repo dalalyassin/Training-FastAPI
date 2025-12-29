@@ -1,9 +1,9 @@
 # tests/test_models.py
 import pytest
-from pydantic import ValidationError
 from backend.schemas.auth import Token
-from backend.schemas.chat import Prompt, ChatRequest, LLMResponse
+from backend.schemas.chat import ChatRequest, LLMResponse, Prompt
 from backend.schemas.users import UserCreate
+from pydantic import ValidationError
 
 
 class TestToken:

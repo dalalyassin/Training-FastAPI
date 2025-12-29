@@ -1,5 +1,7 @@
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
+
 from openai import AsyncOpenAI
+
 from schemas.chat import Prompt
 
 client = AsyncOpenAI()

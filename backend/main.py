@@ -1,10 +1,12 @@
+import uuid
+
+import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-import uvicorn
 from slowapi.errors import RateLimitExceeded
-from routers import public, api_key_auth, oauth, health, chat
+
 from core.rate_limit import limiter
-import uuid
+from routers import api_key_auth, chat, health, oauth, public
 
 app = FastAPI(title="Backend API")
 
