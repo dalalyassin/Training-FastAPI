@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      JWT_SECRET_KEY: test-secret-key-for-ci-only
+      API_KEY: test-api-key-for-ci
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
