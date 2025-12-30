@@ -10,7 +10,6 @@
 	"forwardPorts": [
 		8000
 	],
-	"postCreateCommand": "task setup",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -20,8 +19,16 @@
 		},
 		"settings": {
 			"[python]": {
-					"editor.defaultFormatter": "ms-python.black-formatter"
-				}
+				"editor.defaultFormatter": "ms-python.black-formatter"
+			}
 		}
-	}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+			"version": "latest",
+			"enableNonRootDocker": "true",
+			"moby": "true"
+		}
+	},
+	"postCreateCommand": "task setup"
 }
