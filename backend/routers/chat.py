@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import StreamingResponse
+
+from core.rate_limit import limiter
+from core.security import verify_api_key
 from schemas.chat import Prompt
 from services.llm import generate_stream_response
-from core.security import verify_api_key
-from core.rate_limit import limiter
 
 router = APIRouter()
 
